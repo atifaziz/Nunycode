@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
+    <Description>Punycode for .NET</Description>
+    <PackageProjectUrl>https://github.com/atifaziz/Nunycode</PackageProjectUrl>
+    <Copyright>© 2017 Atif Aziz. Portions © Mathias Bynens.</Copyright>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/atifaziz/Nunycode.git</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>punycode</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
