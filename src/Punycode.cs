@@ -60,8 +60,6 @@ namespace Nunycode
 
         /*--------------------------------------------------------------------------*/
 
-        static char StringFromCharCode(int n) => (char) n;
-
         static ArgumentOutOfRangeException OverflowError() =>
             RangeError("Overflow: input needs wider integers to process");
         static ArgumentOutOfRangeException InvalidInputError() =>
@@ -367,7 +365,7 @@ namespace Nunycode
             {
                 if (currentValue < 0x80)
                 {
-                    output.Push(StringFromCharCode(currentValue));
+                    output.Push((char) currentValue);
                 }
             }
 
@@ -431,12 +429,12 @@ namespace Nunycode
                             var qMinusT = q - t;
                             var baseMinusT = Base - t;
                             output.Push(
-                                    StringFromCharCode(DigitToBasic(t + qMinusT % baseMinusT, false))
+                                    (char) DigitToBasic(t + qMinusT % baseMinusT, false)
                             );
                             q = qMinusT / baseMinusT;
                         }
 
-                        output.Push(StringFromCharCode(DigitToBasic(q, false)));
+                        output.Push((char) DigitToBasic(q, false));
                         bias = Adapt(delta, handledCPCountPlusOne, handledCPCount == basicLength);
                         delta = 0;
                         ++handledCPCount;
