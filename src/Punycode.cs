@@ -52,7 +52,7 @@ namespace Nunycode
         // Regular expressions
 
         static readonly Regex RegexNonAscii = new Regex(@"[^\0-\x7E]", RegexOptions.ECMAScript); // non-ASCII chars
-        static readonly Regex RegexSeparators = new Regex(@"[\x2E\u3002\uFF0E\uFF61]", RegexOptions.ECMAScript); // RFC 3490 separators
+        static readonly char[] Rfc3490Separators = { '\x2E', '\u3002', '\uFF0E', '\uFF61' };
 
         // Convenience shortcuts
 
@@ -91,9 +91,7 @@ namespace Nunycode
                 result.Append(parts[0] + "@");
                 @string = parts[1];
             }
-            // Avoid `split(regex)` for IE8 compatibility. See #17.
-            @string = RegexSeparators.Replace(@string, "\x2E");
-            var labels = @string.Split('.');
+            var labels = @string.Split(Rfc3490Separators);
             var encoded = string.Join(".", labels.Select(fn));
             return result.Append(encoded).ToString();
         }
