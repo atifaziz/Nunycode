@@ -62,8 +62,6 @@ namespace Nunycode
 
         static char StringFromCharCode(int n) => (char) n;
 
-        static int Floor(int n) => n;
-
         static ArgumentOutOfRangeException OverflowError() =>
             RangeError("Overflow: input needs wider integers to process");
         static ArgumentOutOfRangeException InvalidInputError() =>
@@ -229,11 +227,11 @@ namespace Nunycode
         static int Adapt(int delta, int numPoints, bool firstTime)
         {
             var k = 0;
-            delta = firstTime ? Floor(delta / Damp) : delta >> 1;
-            delta += Floor(delta / numPoints);
+            delta = firstTime ? delta / Damp : delta >> 1;
+            delta += delta / numPoints;
             for (/* no initialization */; delta > BaseMinusTMin * TMax >> 1; k += Base)
-                delta = Floor(delta / BaseMinusTMin);
-            return Floor(k + (BaseMinusTMin + 1) * delta / (delta + Skew));
+                delta = delta / BaseMinusTMin;
+            return k + (BaseMinusTMin + 1) * delta / (delta + Skew);
         }
 
         /// <summary>
@@ -293,7 +291,7 @@ namespace Nunycode
 
                     var digit = BasicToDigit(input.CharCodeAt(index++));
 
-                    if (digit >= Base || digit > Floor((MaxInt - i) / w))
+                    if (digit >= Base || digit > (MaxInt - i) / w)
                     {
                         throw OverflowError();
                     }
@@ -307,7 +305,7 @@ namespace Nunycode
                     }
 
                     var baseMinusT = Base - t;
-                    if (w > Floor(MaxInt / baseMinusT))
+                    if (w > MaxInt / baseMinusT)
                     {
                         throw OverflowError();
                     }
@@ -321,12 +319,12 @@ namespace Nunycode
 
                 // `i` was supposed to wrap around from `out` to `0`,
                 // incrementing `n` each time, so we'll fix that now:
-                if (Floor(i / @out) > MaxInt - n)
+                if (i / @out > MaxInt - n)
                 {
                     throw OverflowError();
                 }
 
-                n += Floor(i / @out);
+                n += i / @out;
                 i %= @out;
 
                 // Insert `n` at position `i` of the output.
@@ -405,7 +403,7 @@ namespace Nunycode
                 // but guard against overflow.
                 // ReSharper disable once InconsistentNaming
                 var handledCPCountPlusOne = handledCPCount + 1;
-                if (m - n > Floor((MaxInt - delta) / handledCPCountPlusOne))
+                if (m - n > (MaxInt - delta) / handledCPCountPlusOne)
                 {
                     throw OverflowError();
                 }
@@ -435,7 +433,7 @@ namespace Nunycode
                             output.Push(
                                     StringFromCharCode(DigitToBasic(t + qMinusT % baseMinusT, false))
                             );
-                            q = Floor(qMinusT / baseMinusT);
+                            q = qMinusT / baseMinusT;
                         }
 
                         output.Push(StringFromCharCode(DigitToBasic(q, false)));
