@@ -1,0 +1,22 @@
+language: csharp
+os:
+  - linux
+  - osx
+osx_image: xcode8.3
+solution: Nunycode.sln
+dist: trusty
+sudo: required
+dotnet: 2.0.0
+env:
+  - CONFIGURATION=Debug
+  - CONFIGURATION=Release
+
+before_install:
+  - dotnet --info
+
+install:
+  - dotnet restore
+
+script:
+  - dotnet build -c $CONFIGURATION
+  - dotnet test -c $CONFIGURATION tests
