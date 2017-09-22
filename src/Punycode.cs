@@ -32,7 +32,7 @@ namespace Nunycode
 
     public static class Ucs2
     {
-        public static int[] Decode(string @string) => Punycode.Ucs2Decode(@string);
+        public static int[] Decode(string str) => Punycode.Ucs2Decode(str);
         public static string Encode(params int[] codePoints) => Punycode.Ucs2Encode(codePoints);
     }
 
@@ -78,18 +78,18 @@ namespace Nunycode
         /// or email addresses.
         /// </summary>
 
-        static string MapDomain(string @string, Func<string, string> fn)
+        static string MapDomain(string str, Func<string, string> fn)
         {
-            var parts = @string.Split('@');
+            var parts = str.Split('@');
             var result = new StringBuilder();
             if (parts.Length > 1)
             {
                 // In email addresses, only the domain name should be punycoded. Leave
                 // the local part (i.e. everything up to `@`) intact.
                 result.Append(parts[0] + "@");
-                @string = parts[1];
+                str = parts[1];
             }
-            var labels = @string.Split(Rfc3490Separators);
+            var labels = str.Split(Rfc3490Separators);
             var encoded = string.Join(".", labels.Select(fn));
             return result.Append(encoded).ToString();
         }
@@ -107,18 +107,18 @@ namespace Nunycode
         /// internal character encoding: UCS-2 or UTF-16?</a>.
         /// </remarks>
 
-        internal static int[] Ucs2Decode(string @string)
+        internal static int[] Ucs2Decode(string str)
         {
             var output = (default(int[]), 0);
             var counter = 0;
-            var length = @string.Length;
+            var length = str.Length;
             while (counter < length)
             {
-                var value = @string.CharCodeAt(counter++);
+                var value = str.CharCodeAt(counter++);
                 if (value >= 0xD800 && value <= 0xDBFF && counter < length)
                 {
                     // It's a high surrogate, and there is a next character.
-                    var extra = @string.CharCodeAt(counter++);
+                    var extra = str.CharCodeAt(counter++);
                     if ((extra & 0xFC00) == 0xDC00)
                     { // Low surrogate.
                         output = output.Push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
@@ -458,10 +458,10 @@ namespace Nunycode
         /// </summary>
 
         public static string ToUnicode(string input) =>
-            MapDomain(input, @string =>
-                @string.StartsWith("xn--", StringComparison.Ordinal)
-                    ? Decode(@string.Substring(4).ToLowerInvariant())
-                    : @string);
+            MapDomain(input, str =>
+                str.StartsWith("xn--", StringComparison.Ordinal)
+                    ? Decode(str.Substring(4).ToLowerInvariant())
+                    : str);
 
         /// <summary>
         /// Converts a Unicode string representing a domain name or an email address to
@@ -471,9 +471,9 @@ namespace Nunycode
         /// </summary>
 
         public static string ToAscii(string input) =>
-            MapDomain(input, @string =>
-                RegexNonAscii.IsMatch(@string)
-                    ? "xn--" + Encode(@string)
-                    : @string);
+            MapDomain(input, str =>
+                RegexNonAscii.IsMatch(str)
+                    ? "xn--" + Encode(str)
+                    : str);
     }
 }
