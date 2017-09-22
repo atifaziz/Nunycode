@@ -21,6 +21,8 @@
 //
 #endregion
 
+[assembly: System.CLSCompliant(true)]
+
 namespace Nunycode
 {
     using System;
