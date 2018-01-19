@@ -20,6 +20,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="..\COPYING.txt" Link="COPYING.txt">
+      <PackagePath />
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
   </ItemGroup>
 
