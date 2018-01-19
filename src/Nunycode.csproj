@@ -8,7 +8,7 @@
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/atifaziz/Nunycode.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageTags>punycode</PackageTags>
+    <PackageTags>punycode ietf rfc3492 rfc5891 rfc-3492 rfc-5891</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
