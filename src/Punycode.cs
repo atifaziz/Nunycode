@@ -21,8 +21,6 @@
 //
 #endregion
 
-[assembly: System.CLSCompliant(true)]
-
 namespace Nunycode
 {
     using System;
@@ -30,13 +28,13 @@ namespace Nunycode
     using System.Text;
     using System.Text.RegularExpressions;
 
-    public static class Ucs2
+    static partial class Ucs2
     {
         public static int[] Decode(string str) => Punycode.Ucs2Decode(str);
         public static string Encode(params int[] codePoints) => Punycode.Ucs2Encode(codePoints);
     }
 
-    public static class Punycode
+    static partial class Punycode
     {
         const int MaxInt = int.MaxValue; // aka. 0x7FFFFFFF or 2^31-1
 
