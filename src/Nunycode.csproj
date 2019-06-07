@@ -10,6 +10,9 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>punycode ietf rfc3492 rfc5891 rfc-3492 rfc-5891</PackageTags>
     <PackageLicenseFile>COPYING.txt</PackageLicenseFile>
+    <PackageOutputPath>..\dist</PackageOutputPath>
+    <IncludeSymbols>true</IncludeSymbols>
+    <IncludeSource>true</IncludeSource>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
