@@ -6,10 +6,10 @@
     <Description>Punycode for .NET</Description>
     <PackageProjectUrl>https://github.com/atifaziz/Nunycode</PackageProjectUrl>
     <Copyright>© 2017 Atif Aziz. Portions © Mathias Bynens.</Copyright>
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/atifaziz/Nunycode.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>punycode ietf rfc3492 rfc5891 rfc-3492 rfc-5891</PackageTags>
+    <PackageLicenseFile>COPYING.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -21,9 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\COPYING.txt" Link="COPYING.txt">
-      <PackagePath />
-    </Content>
+    <None Include="..\COPYING.txt" Pack="true" PackagePath="$(PackageLicenseFile)"/>
   </ItemGroup>
 
   <ItemGroup>
