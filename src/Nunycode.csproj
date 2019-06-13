@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VersionPrefix>1.1.0</VersionPrefix>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard1.3</TargetFrameworks>
     <Description>Punycode for .NET</Description>
     <PackageProjectUrl>https://github.com/atifaziz/Nunycode</PackageProjectUrl>
     <Copyright>© 2017 Atif Aziz. Portions © Mathias Bynens.</Copyright>
@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.ValueTuple" Version="4.4.0" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="'$(TargetFramework)'=='netstandard1.3'" />
   </ItemGroup>
 
 </Project>
