@@ -6,13 +6,13 @@
     <Description>Punycode for .NET</Description>
     <PackageProjectUrl>https://github.com/atifaziz/Nunycode</PackageProjectUrl>
     <Copyright>© 2017 Atif Aziz. Portions © Mathias Bynens.</Copyright>
-    <RepositoryUrl>https://github.com/atifaziz/Nunycode.git</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageTags>punycode ietf rfc3492 rfc5891 rfc-3492 rfc-5891</PackageTags>
     <PackageLicenseFile>COPYING.txt</PackageLicenseFile>
     <PackageOutputPath>..\dist</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>
     <IncludeSource>true</IncludeSource>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="'$(TargetFramework)'=='netstandard1.3'" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
