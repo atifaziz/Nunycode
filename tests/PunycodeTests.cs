@@ -135,6 +135,17 @@ namespace Nunycode.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Punycode.Decode("\x81"));
 
+        #pragma warning disable xUnit1026
+
+        // warning xUnit1026: Theory method 'Decode' on test class 'PunycodeTests' does not use parameter 'description'.
+        // warning xUnit1026: Theory method 'Encode' on test class 'PunycodeTests' does not use parameter 'description'.
+        // warning xUnit1026: Theory method 'UnicodeDomains' on test class 'PunycodeTests' does not use parameter 'description'.
+        // warning xUnit1026: Theory method 'UnicodeStrings' on test class 'PunycodeTests' does not use parameter 'description'.
+        // warning xUnit1026: Theory method 'AsciiDomains' on test class 'PunycodeTests' does not use parameter 'description'.
+        // warning xUnit1026: Theory method 'AsciiStrings' on test class 'PunycodeTests' does not use parameter 'description'.
+        // warning xUnit1026: Theory method 'AsciiStrings' on test class 'PunycodeTests' does not use parameter 'decoded'.
+        // warning xUnit1026: Theory method 'AsciiSeparators' on test class 'PunycodeTests' does not use parameter 'description'.
+
         [Theory, MemberData(nameof(Strings), DescriptionFallback.Encoded)]
         public void Decode(string description, string decoded, string encoded) =>
             Assert.Equal(decoded, Punycode.Decode(encoded));
@@ -168,6 +179,8 @@ namespace Nunycode.Tests
         [MemberData(nameof(Separators))]
         public void AsciiSeparators(string description, string decoded, string encoded) =>
             Assert.Equal(encoded, Punycode.ToAscii(decoded));
+
+        #pragma warning restore xUnit1026
 
         public static IEnumerable<object[]> Domains(DescriptionFallback fallback) =>
             from t in new[]
